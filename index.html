@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Who's Lying? — Detective Case Files</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="app-shell">
+
+    <!-- =========================
+         TOP BAR
+    ========================== -->
+    <header class="topbar">
+
+        <button class="brand" id="brandHome">
+            <span class="brand-mark">🔎</span>
+            <span>
+                <strong>WHO'S LYING?</strong>
+                <small>DETECTIVE CASE FILES</small>
+            </span>
+        </button>
+
+        <div class="topbar-right">
+
+            <div class="rank-pill">
+                <span>RANK</span>
+                <strong id="topRank">ROOKIE</strong>
+            </div>
+
+            <div class="xp-pill">
+                <span>XP</span>
+                <strong id="topXP">0</strong>
+            </div>
+
+            <button class="icon-btn" id="helpBtn" title="How to play">
+                ?
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <main id="app">
+
+        <!-- =========================
+             HOME
+        ========================== -->
+        <section id="home" class="screen active">
+
+            <div class="home-layout">
+
+                <div class="home-hero">
+
+                    <div class="office-badge">
+                        <span class="badge-pin"></span>
+                        PRIVATE INVESTIGATIONS
+                    </div>
+
+                    <p class="eyebrow">CASE FILE DIVISION</p>
+
+                    <h1>
+                        WHO'S
+                        <span>LYING?</span>
+                    </h1>
+
+                    <p class="hero-copy">
+                        Every story has a weak point.
+                        Every lie leaves a clue.
+                        Can you find it?
+                    </p>
+
+                    <div class="hero-actions">
+
+                        <button class="primary-btn large" id="playBtn">
+                            <span>▶</span>
+                            START INVESTIGATION
+                        </button>
+
+                        <button class="secondary-btn large" id="casesBtn">
+                            <span>🗂️</span>
+                            CASE FILES
+                        </button>
+
+                    </div>
+
+                    <div class="home-progress">
+
+                        <div class="progress-card">
+                            <span class="progress-icon">📁</span>
+                            <div>
+                                <strong id="homeCases">0 / 6</strong>
+                                <small>Cases solved</small>
+                            </div>
+                        </div>
+
+                        <div class="progress-card">
+                            <span class="progress-icon">⭐</span>
+                            <div>
+                                <strong id="homeStars">0</strong>
+                                <small>Stars earned</small>
+                            </div>
+                        </div>
+
+                        <div class="progress-card">
+                            <span class="progress-icon">🏆</span>
+                            <div>
+                                <strong id="homeAchievements">0</strong>
+                                <small>Achievements</small>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Detective desk -->
+                <div class="home-desk">
+
+                    <div class="desk-lamp"></div>
+
+                    <div class="desk-board">
+
+                        <div class="paper paper-one">
+                            <span class="paper-stamp">CONFIDENTIAL</span>
+                            <h4>INVESTIGATION</h4>
+                            <p>Observe.</p>
+                            <p>Compare.</p>
+                            <p>Question.</p>
+                            <p>Connect.</p>
+                        </div>
+
+                        <div class="paper paper-two">
+                            <div class="paper-lines"></div>
+                            <strong>Detective Notes</strong>
+                            <small>Something doesn't add up...</small>
+                        </div>
+
+                        <div class="photo-card">
+                            <div class="photo-face">🕵🏽</div>
+                            <span>FIELD UNIT</span>
+                        </div>
+
+                        <div class="folder-decoration">
+                            <div class="folder-tab">CASE FILE</div>
+                            <div class="folder-body">
+                                <span>ACTIVE</span>
+                                <strong>06</strong>
+                            </div>
+                        </div>
+
+                        <div class="coffee-cup">
+                            ☕
+                        </div>
+
+                        <div class="desk-pencil">✎</div>
+
+                    </div>
+
+                    <div class="desk-drawer">
+                        <span></span>
+                        <span></span>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             CASE FILES
+        ========================== -->
+        <section id="cases" class="screen">
+
+            <div class="page-heading">
+
+                <button class="back-btn" data-screen="home">
+                    ← Main Office
+                </button>
+
+                <div>
+                    <p class="eyebrow">DETECTIVE HQ</p>
+                    <h2>CASE FILES</h2>
+                    <p>Choose an investigation from your active files.</p>
+                </div>
+
+                <div class="rank-card">
+                    <small>YOUR RANK</small>
+                    <strong id="caseRank">ROOKIE</strong>
+                    <span id="caseXP">0 XP</span>
+                </div>
+
+            </div>
+
+            <div class="case-notice">
+                <span>📌</span>
+                <div>
+                    <strong>Investigation Board</strong>
+                    <p>Complete cases to unlock new files. Replay completed cases to improve your score and earn more stars.</p>
+                </div>
+            </div>
+
+            <div id="caseGrid" class="case-grid"></div>
+
+        </section>
+
+
+        <!-- =========================
+             BRIEFING
+        ========================== -->
+        <section id="briefing" class="screen">
+
+            <div class="briefing-wrap">
+
+                <button class="back-btn" data-screen="cases">
+                    ← Back to Case Files
+                </button>
+
+                <div class="case-folder">
+
+                    <div class="folder-header">
+
+                        <div>
+                            <span class="file-label">CONFIDENTIAL CASE FILE</span>
+                            <strong id="briefingNumber">CASE #01</strong>
+                        </div>
+
+                        <span class="folder-status" id="briefingStatus">
+                            ACTIVE
+                        </span>
+
+                    </div>
+
+                    <div class="folder-content">
+
+                        <div class="briefing-main">
+
+                            <div class="briefing-icon" id="briefingIcon">
+                                💻
+                            </div>
+
+                            <p class="eyebrow" id="briefingDifficulty">
+                                EASY INVESTIGATION
+                            </p>
+
+                            <h1 id="briefingTitle">
+                                The Missing Laptop
+                            </h1>
+
+                            <p class="briefing-description" id="briefingDescription"></p>
+
+                            <div class="case-tags" id="briefingTags"></div>
+
+                            <div class="objective-card">
+
+                                <span class="objective-icon">🎯</span>
+
+                                <div>
+                                    <small>YOUR OBJECTIVE</small>
+                                    <strong id="briefingObjective">
+                                        Identify who is lying.
+                                    </strong>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <aside class="briefing-side">
+
+                            <div class="briefing-stat">
+                                <span>📍 LOCATION</span>
+                                <strong id="briefingLocation"></strong>
+                            </div>
+
+                            <div class="briefing-stat">
+                                <span>👥 SUSPECTS</span>
+                                <strong id="briefingSuspects"></strong>
+                            </div>
+
+                            <div class="briefing-stat">
+                                <span>🔎 EVIDENCE</span>
+                                <strong id="briefingEvidence"></strong>
+                            </div>
+
+                            <div class="briefing-stat">
+                                <span>⏱️ TIME LIMIT</span>
+                                <strong id="briefingTime"></strong>
+                            </div>
+
+                            <button class="primary-btn full" id="beginCaseBtn">
+                                OPEN CASE FILE →
+                            </button>
+
+                        </aside>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             GAME
+        ========================== -->
+        <section id="game" class="screen">
+
+            <div class="investigation-header">
+
+                <div class="investigation-title">
+
+                    <button class="back-btn compact" id="leaveCaseBtn">
+                        ← Case Files
+                    </button>
+
+                    <div>
+                        <p class="eyebrow" id="gameCaseNumber">CASE #01</p>
+                        <h2 id="gameCaseTitle">The Missing Laptop</h2>
+                    </div>
+
+                </div>
+
+                <div class="game-stats">
+
+                    <div class="game-stat timer-stat">
+                        <small>TIME</small>
+                        <strong id="timer">02:00</strong>
+                    </div>
+
+                    <div class="game-stat">
+                        <small>SCORE</small>
+                        <strong id="score">1000</strong>
+                    </div>
+
+                    <div class="game-stat">
+                        <small>ATTEMPTS</small>
+                        <strong id="attempts">♥ ♥ ♥</strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="investigation-progress">
+
+                <div>
+                    <span id="progressText">0 / 6 evidence collected</span>
+                    <small id="progressMessage">Start by examining the scene.</small>
+                </div>
+
+                <div class="progress-track">
+                    <span id="progressBar"></span>
+                </div>
+
+            </div>
+
+
+            <div class="investigation-layout">
+
+                <!-- LEFT: OFFICE -->
+                <section class="office-scene panel">
+
+                    <div class="panel-heading">
+
+                        <div>
+                            <span class="eyebrow">CRIME SCENE</span>
+                            <h3 id="sceneTitle">Marketing Office</h3>
+                        </div>
+
+                        <span class="scene-time" id="sceneTime">
+                            20:30
+                        </span>
+
+                    </div>
+
+
+                    <div class="office-room" id="officeRoom">
+
+                        <div class="window-area">
+                            <div class="window-city">
+                                <span>✦</span>
+                                <span>•</span>
+                                <span>✦</span>
+                                <span>•</span>
+                                <span>✦</span>
+                            </div>
+                        </div>
+
+                        <div class="wall-clock">20:30</div>
+
+                        <div class="wall-frame">
+                            <span>CASE</span>
+                            <strong>OPEN</strong>
+                        </div>
+
+                        <div class="filing-cabinet">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+
+                        <div class="desk-surface">
+
+                            <div class="monitor-object">
+                                <div class="monitor-screen">CASE LOG</div>
+                                <div class="monitor-stand"></div>
+                            </div>
+
+                            <div class="keyboard-object"></div>
+
+                            <div class="paper-stack">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+
+                            <div class="folder-object">
+                                <span>CONFIDENTIAL</span>
+                            </div>
+
+                            <div class="coffee-object">
+                                ☕
+                            </div>
+
+                        </div>
+
+                        <div class="desk-drawer-large"></div>
+
+                        <div class="scene-evidence" id="sceneEvidence"></div>
+
+                    </div>
+
+                    <div class="scene-instruction">
+                        <span>💡</span>
+                        <strong>Investigate the room</strong>
+                        <small>Look for highlighted evidence points.</small>
+                    </div>
+
+                </section>
+
+
+                <!-- RIGHT: DETECTIVE PANEL -->
+                <aside class="detective-panel">
+
+                    <section class="panel suspect-panel">
+
+                        <div class="panel-heading">
+                            <div>
+                                <span class="eyebrow">PERSONS OF INTEREST</span>
+                                <h3>Suspect Dossiers</h3>
+                            </div>
+
+                            <span class="panel-count" id="suspectCount">4</span>
+                        </div>
+
+                        <div id="suspects" class="suspect-list"></div>
+
+                    </section>
+
+
+                    <section class="panel hint-panel">
+
+                        <div class="panel-heading">
+                            <div>
+                                <span class="eyebrow">DETECTIVE ASSISTANCE</span>
+                                <h3>Need a Lead?</h3>
+                            </div>
+
+                            <span class="hint-bulb">💡</span>
+                        </div>
+
+                        <p class="hint-description">
+                            Use a hint if you're stuck. Experienced detectives can solve the case without them for a bonus.
+                        </p>
+
+                        <div class="hint-levels">
+
+                            <button class="hint-btn" data-hint="1">
+                                <span>01</span>
+                                <div>
+                                    <strong>Small Nudge</strong>
+                                    <small>-75 points</small>
+                                </div>
+                            </button>
+
+                            <button class="hint-btn" data-hint="2">
+                                <span>02</span>
+                                <div>
+                                    <strong>Useful Lead</strong>
+                                    <small>-125 points</small>
+                                </div>
+                            </button>
+
+                            <button class="hint-btn" data-hint="3">
+                                <span>03</span>
+                                <div>
+                                    <strong>Breakthrough</strong>
+                                    <small>-200 points</small>
+                                </div>
+                            </button>
+
+                        </div>
+
+                        <div id="hintDisplay" class="hint-display hidden"></div>
+
+                    </section>
+
+
+                    <button class="accuse-btn" id="accuseBtn" disabled>
+                        <span>⚖️</span>
+                        <div>
+                            <strong>MAKE AN ACCUSATION</strong>
+                            <small>Select a suspect first</small>
+                        </div>
+                        <span>→</span>
+                    </button>
+
+                </aside>
+
+            </div>
+
+
+            <!-- EVIDENCE BOARD -->
+            <section class="evidence-board panel">
+
+                <div class="evidence-board-header">
+
+                    <div>
+                        <span class="eyebrow">INVESTIGATION BOARD</span>
+                        <h3>Collected Evidence</h3>
+                    </div>
+
+                    <div class="board-status">
+                        <span id="evidenceCount">0 / 6</span>
+                        <small>pieces collected</small>
+                    </div>
+
+                </div>
+
+                <div id="clues" class="evidence-grid"></div>
+
+            </section>
+
+        </section>
+
+
+        <!-- =========================
+             RESULTS
+        ========================== -->
+        <section id="result" class="screen">
+
+            <div class="result-wrap">
+
+                <div class="result-top">
+
+                    <div class="result-stamp" id="resultStamp">
+                        CASE CLOSED
+                    </div>
+
+                    <div class="result-icon" id="resultIcon">
+                        🕵🏽
+                    </div>
+
+                    <p class="eyebrow" id="resultEyebrow">
+                        INVESTIGATION COMPLETE
+                    </p>
+
+                    <h1 id="resultTitle">
+                        Excellent Detective Work
+                    </h1>
+
+                    <p id="resultMessage"></p>
+
+                </div>
+
+
+                <div class="result-card">
+
+                    <div class="result-score">
+
+                        <span>FINAL SCORE</span>
+
+                        <strong id="finalScore">0</strong>
+
+                        <div class="stars" id="resultStars">
+                            ☆ ☆ ☆
+                        </div>
+
+                    </div>
+
+
+                    <div class="result-breakdown">
+
+                        <div>
+                            <span>Evidence</span>
+                            <strong id="finalClues">0 / 6</strong>
+                        </div>
+
+                        <div>
+                            <span>Time Bonus</span>
+                            <strong id="timeBonus">+0</strong>
+                        </div>
+
+                        <div>
+                            <span>Clean Investigation</span>
+                            <strong id="cleanBonus">+0</strong>
+                        </div>
+
+                        <div>
+                            <span>Hint Penalty</span>
+                            <strong id="hintPenalty">0</strong>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="achievement-unlocked hidden" id="achievementBox">
+
+                    <span>🏆</span>
+
+                    <div>
+                        <small>ACHIEVEMENT UNLOCKED</small>
+                        <strong id="achievementTitle">Perfect Detective</strong>
+                        <p id="achievementText"></p>
+                    </div>
+
+                </div>
+
+
+                <div class="solution-card">
+
+                    <div class="solution-header">
+                        <span>📂</span>
+                        <div>
+                            <small>CASE FILE CONCLUSION</small>
+                            <strong>The Evidence Trail</strong>
+                        </div>
+                    </div>
+
+                    <div id="solution"></div>
+
+                </div>
+
+
+                <div class="result-actions">
+
+                    <button class="primary-btn" id="nextCaseBtn">
+                        NEXT CASE →
+                    </button>
+
+                    <button class="secondary-btn" id="againBtn">
+                        ↻ REPLAY CASE
+                    </button>
+
+                    <button class="text-btn" id="resultCasesBtn">
+                        Case Files
+                    </button>
+
+                    <button class="text-btn" id="resultHomeBtn">
+                        Main Office
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<!-- =========================
+     EVIDENCE MODAL
+========================== -->
+<div id="modal" class="modal hidden">
+
+    <div class="modal-backdrop"></div>
+
+    <div class="evidence-modal">
+
+        <button id="closeModal" class="modal-close">
+            ×
+        </button>
+
+        <div class="modal-paperclip">📎</div>
+
+        <div class="modal-icon" id="modalIcon">
+            🔎
+        </div>
+
+        <span class="evidence-label" id="modalLabel">
+            NEW EVIDENCE
+        </span>
+
+        <h2 id="modalTitle"></h2>
+
+        <p id="modalText"></p>
+
+        <div class="modal-note">
+            <span>CASE NOTE</span>
+            <p id="modalNote"></p>
+        </div>
+
+        <button class="primary-btn full" id="modalAction">
+            ADD TO EVIDENCE BOARD
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     SUSPECT MODAL
+========================== -->
+<div id="suspectModal" class="modal hidden">
+
+    <div class="modal-backdrop"></div>
+
+    <div class="suspect-modal">
+
+        <button class="modal-close" id="closeSuspectModal">
+            ×
+        </button>
+
+        <div class="suspect-profile">
+
+            <div class="large-avatar" id="suspectAvatar">
+                👩🏽
+            </div>
+
+            <div>
+                <span class="eyebrow">PERSON OF INTEREST</span>
+                <h2 id="suspectName"></h2>
+                <p id="suspectRole"></p>
+            </div>
+
+        </div>
+
+        <div class="profile-details">
+
+            <div>
+                <span>ACCESS</span>
+                <strong id="suspectAccess"></strong>
+            </div>
+
+            <div>
+                <span>ALIBI</span>
+                <strong id="suspectAlibi"></strong>
+            </div>
+
+            <div>
+                <span>MOTIVE</span>
+                <strong id="suspectMotive"></strong>
+            </div>
+
+        </div>
+
+        <div class="statement-card">
+            <span>STATEMENT</span>
+            <p id="suspectStatement"></p>
+        </div>
+
+        <button class="secondary-btn full" id="selectSuspectBtn">
+            SELECT AS SUSPECT
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     ACCUSATION MODAL
+========================== -->
+<div id="accusationModal" class="modal hidden">
+
+    <div class="modal-backdrop"></div>
+
+    <div class="accusation-modal">
+
+        <button class="modal-close" id="closeAccusationModal">
+            ×
+        </button>
+
+        <div class="accusation-symbol">
+            ⚖️
+        </div>
+
+        <span class="eyebrow">FINAL DECISION</span>
+
+        <h2>Are you ready to accuse?</h2>
+
+        <p>
+            You are about to name
+            <strong id="accusedName">Jessica</strong>
+            as the person responsible.
+        </p>
+
+        <div class="warning-note">
+            <span>⚠️</span>
+            <div>
+                <strong>Choose carefully.</strong>
+                <small>A wrong accusation costs an attempt and points.</small>
+            </div>
+        </div>
+
+        <div class="modal-actions">
+
+            <button class="secondary-btn" id="cancelAccusation">
+                REVIEW EVIDENCE
+            </button>
+
+            <button class="accuse-confirm" id="confirmAccusation">
+                ACCUSE
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     HELP MODAL
+========================== -->
+<div id="helpModal" class="modal hidden">
+
+    <div class="modal-backdrop"></div>
+
+    <div class="help-modal">
+
+        <button class="modal-close" id="closeHelp">
+            ×
+        </button>
+
+        <div class="help-icon">🕵️</div>
+
+        <span class="eyebrow">DETECTIVE HANDBOOK</span>
+
+        <h2>How to Play</h2>
+
+        <div class="help-list">
+
+            <div>
+                <span>01</span>
+                <p><strong>Investigate.</strong> Examine every highlighted object at the scene.</p>
+            </div>
+
+            <div>
+                <span>02</span>
+                <p><strong>Collect evidence.</strong> Important clues are added to your investigation board.</p>
+            </div>
+
+            <div>
+                <span>03</span>
+                <p><strong>Study suspects.</strong> Compare their statements with the evidence.</p>
+            </div>
+
+            <div>
+                <span>04</span>
+                <p><strong>Use hints carefully.</strong> Hints help, but reduce your final score.</p>
+            </div>
+
+            <div>
+                <span>05</span>
+                <p><strong>Make your accusation.</strong> Connect the evidence before making your final decision.</p>
+            </div>
+
+        </div>
+
+        <button class="primary-btn full" id="helpCloseBtn">
+            GOT IT
+        </button>
+
+    </div>
+
+</div>
+
+
+<div id="toast"></div>
+
+<script src="game.js"></script>
+
+</body>
+</html>
